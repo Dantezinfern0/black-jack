@@ -60,7 +60,6 @@ const dealerScore = () => {
     dealerHand.push(dealerCard)
     let total = 0
     total += dealerCard.value
-    dealerFinalScore.push(total)
     dealerFinalScore = total
     // sum of dealerHand.value
   }
@@ -77,7 +76,8 @@ const dealerScore = () => {
   } else if (playerFinalScore > dealerFinalScore) {
     document.querySelector('.player-message').textContent('You Win!')
     // now compare scores in the event of a tie or push
-  } else if (dealerFinalScore === playerFinalScore) {
+  }
+  if (dealerFinalScore === playerFinalScore) {
     document.querySelector('.player-message').textContent('PUSH!')
     document.querySelector('.dealer-message').textContent('PUSH!')
   }
@@ -91,19 +91,15 @@ const dealOneCard = () => {
   document.querySelector('.card-draw').appendChild(imageTag)
   playerHand.push(dealtCard)
   console.log(dealtCard)
-  let total = () => {
-    for (let i = 0; i < playerHand.length; i++) {
-      total += playerHand[i].value
-      // sum of playersHand.value
-      playerFinalScore.push(total)
-      playerFinalScore = total
+  let total = 0
+  for (let i = 0; i < playerHand.length; i++) {
+    total += playerHand[i].value
+    // sum of playersHand.value
+    playerFinalScore = total
+    if (total > 21) {
+      // bust! statement
+      document.querySelector('.player-message').textContent('BUST!! - SORRY, TRY AGAIN!')
     }
-  }
-  if (total > 21) {
-    // bust! statement
-    document
-      .querySelector('.player-message')
-      .textContent('BUST!! - SORRY, TRY AGAIN!')
   }
 }
 
