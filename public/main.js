@@ -23,7 +23,7 @@ const dealerHand = []
 let playerFinalScore = 0
 let dealerFinalScore = 0
 // reset by refresh
-// const resetGame = location.reload(true)
+
 // function that creates card objects and puts them into deck array on page load
 const main = () => {
   for (let i = 0; i < ranks.length; i++) {
@@ -83,7 +83,7 @@ const dealerScore = () => {
   }
 }
 
-// function to draw player hand on at a time and evaluate score?
+// function to draw player hand on at a time and evaluate score
 const dealOneCard = () => {
   const dealtCard = fullDeck.pop()
   const imageTag = document.createElement('img')
@@ -106,6 +106,6 @@ const dealOneCard = () => {
 
 document.querySelector('.stand-button').addEventListener('click', dealerScore)
 document.querySelector('.draw-button').addEventListener('click', dealOneCard)
-// document.querySelector('.reset-button').addEventListener('click', resetGame)
+// document.querySelector('.reset-button').addEventListener('click', location.reload())
 document.addEventListener('DOMContentLoaded', main)
 document.addEventListener('DOMContentLoaded', shuffle)
