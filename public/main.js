@@ -1,5 +1,3 @@
-import { setupMaster } from 'cluster'
-
 const ranks = [
   { rank: 'A', value: 11 },
   { rank: '2', value: 2 },
@@ -25,7 +23,7 @@ const dealerHand = []
 let playerFinalScore = 0
 let dealerFinalScore = 0
 // reset by refresh
-const resetGame = location.reload(true)
+// const resetGame = location.reload(true)
 // function that creates card objects and puts them into deck array on page load
 const main = () => {
   for (let i = 0; i < ranks.length; i++) {
@@ -53,51 +51,35 @@ const shuffle = () => {
   console.log(fullDeck)
 }
 
-const playerScore = () => {
-  let total = 0
-  for (i = 0; i < playerHand.length; i++) {
-    total += playerHand[i].value
-    // sum of playersHand.value
-    playerFinalScore.push(total)
-  }
-  if (playerScore > 21) {
-    // bust! statement
-    document
-      .querySelector('.player-message')
-      .textContent('BUST!! - SORRY, TRY AGAIN!')
-  }
-}
-
 const dealerScore = () => {
-  let total = 0
-  for (i = 0; i < dealerHand.length; i++) {
-    total += dealerHand[i].value
-    // sum of dealerHand.value
+  while (dealerFinalScore < 17) {
+    const dealerCard = fullDeck.pop()
+    const dealerImg = document.createElement('img')
+    dealerImg.src = dealerCard.imgUrl
+    document.querySelector('.dealer-hand').appendChild(dealerImg)
+    dealerHand.push(dealerCard)
+    let total = 0
+    total += dealerCard.value
     dealerFinalScore.push(total)
+    dealerFinalScore = total
+    // sum of dealerHand.value
   }
-  if (total > 21) {
-    for (i = 0; i < total.length; i++) {
-      document
-        .querySelector('.dealer-message')
-        .textContent('BUSTED! - PLAYER WINS!!')
-    }
-    while (total < 17) {
-      const dealerCard = fullDeck.pop()
-      const dealerImg = document.createElement('img')
-      dealerImg.src = dealerCard.imgUrl
-      document.querySelector('.dealer-hand').appendChild(dealerImg)
-      // next compare dealer score to see if dealer wins
-    }
-    if (dealerScore > playerScore) {
-      document.querySelector('.dealer-message').textContent('Dealer Wins!')
-      // now compare player score to see if  player wins
-    } else if (playerScore > dealerScore) {
-      document.querySelector('.player-message').textContent('You Win!')
-      // now compare scores in the event of a tie or push
-    } else if (dealerScore === playerScore) {
-      document.querySelector('.player-message').textContent('PUSH!')
-      document.querySelector('.dealer-message').textContent('PUSH!')
-    }
+  if (dealerFinalScore > 21) {
+    document
+      .querySelector('.dealer-message')
+      .textContent('BUSTED! - PLAYER WINS!!')
+  }
+  // next compare dealer score to see if dealer wins
+
+  if (dealerFinalScore > playerFinalScore) {
+    document.querySelector('.dealer-message').textContent('Dealer Wins!')
+    // now compare player score to see if  player wins
+  } else if (playerFinalScore > dealerFinalScore) {
+    document.querySelector('.player-message').textContent('You Win!')
+    // now compare scores in the event of a tie or push
+  } else if (dealerFinalScore === playerFinalScore) {
+    document.querySelector('.player-message').textContent('PUSH!')
+    document.querySelector('.dealer-message').textContent('PUSH!')
   }
 }
 
@@ -109,9 +91,24 @@ const dealOneCard = () => {
   document.querySelector('.card-draw').appendChild(imageTag)
   playerHand.push(dealtCard)
   console.log(dealtCard)
+  let total = () => {
+    for (let i = 0; i < playerHand.length; i++) {
+      total += playerHand[i].value
+      // sum of playersHand.value
+      playerFinalScore.push(total)
+      playerFinalScore = total
+    }
+  }
+  if (total > 21) {
+    // bust! statement
+    document
+      .querySelector('.player-message')
+      .textContent('BUST!! - SORRY, TRY AGAIN!')
+  }
 }
+
 document.querySelector('.stand-button').addEventListener('click', dealerScore)
 document.querySelector('.draw-button').addEventListener('click', dealOneCard)
-document.querySelector('.reset-button').addEventListener('click', resetGame)
+// document.querySelector('.reset-button').addEventListener('click', resetGame)
 document.addEventListener('DOMContentLoaded', main)
 document.addEventListener('DOMContentLoaded', shuffle)
