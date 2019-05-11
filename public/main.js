@@ -21,9 +21,8 @@ const playerHand = []
 const dealerHand = []
 // comparison variables
 let playerFinalScore = 0
-let dealerFinalScore = 0
+let dealerTotal = 0
 // reset by refresh
-
 // function that creates card objects and puts them into deck array on page load
 const main = () => {
   for (let i = 0; i < ranks.length; i++) {
@@ -35,7 +34,7 @@ const main = () => {
         imgUrl: '/card-faces/' + ranks[i].rank + suits[j] + '.png'
       }
       fullDeck.push(card)
-      console.log('card pushed to deck')
+      console.log(card)
     }
     console.log(fullDeck)
   }
@@ -50,39 +49,6 @@ const shuffle = () => {
   }
   console.log(fullDeck)
 }
-
-const dealerScore = () => {
-  while (dealerFinalScore < 17) {
-    const dealerCard = fullDeck.pop()
-    const dealerImg = document.createElement('img')
-    dealerImg.src = dealerCard.imgUrl
-    document.querySelector('.dealer-hand').appendChild(dealerImg)
-    dealerHand.push(dealerCard)
-    dealerFinalScore = 0
-    for (let i = 0; i < dealerHand.length; i++) {
-      dealerFinalScore += dealerHand[i].value
-    }
-    // sum of dealerHand.value
-  }
-  if (dealerFinalScore > 21) {
-    document.querySelector('.dealer-message').textContent =
-      'BUSTED! - PLAYER WINS!!'
-  }
-  // next compare dealer score to see if dealer wins
-
-  if (dealerFinalScore > playerFinalScore) {
-    document.querySelector('.dealer-message').textContent = 'Dealer Wins!'
-    // now compare player score to see if  player wins
-  } else if (playerFinalScore > dealerFinalScore) {
-    document.querySelector('.player-message').textContent = 'You Win!'
-    // now compare scores in the event of a tie or push
-  }
-  if (dealerFinalScore === playerFinalScore) {
-    document.querySelector('.player-message').textContent = 'PUSH!'
-    document.querySelector('.dealer-message').textContent = 'PUSH!'
-  }
-}
-
 // function to draw player hand on at a time and evaluate score
 const dealOneCard = () => {
   const dealtCard = fullDeck.pop()
@@ -95,17 +61,56 @@ const dealOneCard = () => {
   for (let i = 0; i < playerHand.length; i++) {
     total += playerHand[i].value
     // sum of playersHand.value
-    playerFinalScore = total
-    if (total > 21) {
-      // bust! statement
-      document.querySelector('.player-message').textContent =
-        'BUST!! - SORRY, TRY AGAIN!'
+  }
+  if (total > 21) {
+    // bust! statement
+    document.querySelector('.player-message').textContent =
+      'BUST!! - TRY AGAIN!'
+    document.querySelector('.draw-button').disabled = true
+  }
+  if (total === 21) {
+    document.querySelector('.draw-button').disabled = true
+    document.querySelector('.player-message').textContent = 'BLACKJACK!'
+    dealerScore()
+    document.querySelector('.draw-button').disabled = true
+  }
+  if (playerHand.length > 1) {
+    document.querySelector('.stand-button').disabled = false
+  }
+  playerFinalScore.push(total)
+}
+
+const dealerScore = () => {
+  document.querySelector('.stand-button').disabled = true
+  let dTotal = 0
+  while (dTotal < 17) {
+    const dealerCard = fullDeck.pop()
+    const dealerImg = document.createElement('img')
+    dealerImg.src = dealerCard.imgUrl
+    document.querySelector('.dealer-hand').appendChild(dealerImg)
+    dealerHand.push(dealerCard)
+    for (let i = 0; i < dealerHand.length; i++) {
+      dTotal += dealerHand[i].value
+      // dealerTotal.push(total)
     }
+  }
+  // sum of dealerHand.value
+  if (dTotal > 21) {
+    document.querySelector('.player-message').textContent =
+      'DEALER BUSTED! YOU WIN!!'
+  } else if (dTotal === playerFinalScore) {
+    document.querySelector('.player-message').textContent = 'PUSH!'
+  } else if (dTotal > playerFinalScore) {
+    document.querySelector('.player-message').textContent = 'Dealer Wins!'
+    // now compare player score to see if  player wins
+  } else if (dTotal < playerFinalScore) {
+    document.querySelector('.player-message').textContent = 'You Win!'
+    // now compare scores in the event of a tie or push
   }
 }
 
+document.querySelector('.stand-button').disabled = true
 document.querySelector('.stand-button').addEventListener('click', dealerScore)
 document.querySelector('.draw-button').addEventListener('click', dealOneCard)
-// document.querySelector('.reset-button').addEventListener('click', location.reload())
 document.addEventListener('DOMContentLoaded', main)
 document.addEventListener('DOMContentLoaded', shuffle)

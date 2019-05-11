@@ -15,7 +15,7 @@ h1 {
   text-align: center;
   color: whitesmoke;
   background-color: black;
-  margin: 0 20rem 0 20rem;
+  margin: 0 20% 0 20%;
   padding: 2rem;
 }
 main {
@@ -30,8 +30,6 @@ img {
 }
 footer {
   font-size: 3rem;
-}
-footer {
   border-style: inset;
   border-color: black;
   border-width: 1px;
@@ -47,7 +45,6 @@ button {
 }
 .draw-button {
   display: flex;
-  align-items: flex-start;
   flex-direction: column;
   background-color: #588157;
   border-color: #588157;
