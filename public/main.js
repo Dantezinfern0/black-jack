@@ -58,28 +58,28 @@ const dealerScore = () => {
     dealerImg.src = dealerCard.imgUrl
     document.querySelector('.dealer-hand').appendChild(dealerImg)
     dealerHand.push(dealerCard)
-    let total = 0
-    total += dealerCard.value
-    dealerFinalScore = total
+    dealerFinalScore = 0
+    for (let i = 0; i < dealerHand.length; i++) {
+      dealerFinalScore += dealerHand[i].value
+    }
     // sum of dealerHand.value
   }
   if (dealerFinalScore > 21) {
-    document
-      .querySelector('.dealer-message')
-      .textContent('BUSTED! - PLAYER WINS!!')
+    document.querySelector('.dealer-message').textContent =
+      'BUSTED! - PLAYER WINS!!'
   }
   // next compare dealer score to see if dealer wins
 
   if (dealerFinalScore > playerFinalScore) {
-    document.querySelector('.dealer-message').textContent('Dealer Wins!')
+    document.querySelector('.dealer-message').textContent = 'Dealer Wins!'
     // now compare player score to see if  player wins
   } else if (playerFinalScore > dealerFinalScore) {
-    document.querySelector('.player-message').textContent('You Win!')
+    document.querySelector('.player-message').textContent = 'You Win!'
     // now compare scores in the event of a tie or push
   }
   if (dealerFinalScore === playerFinalScore) {
-    document.querySelector('.player-message').textContent('PUSH!')
-    document.querySelector('.dealer-message').textContent('PUSH!')
+    document.querySelector('.player-message').textContent = 'PUSH!'
+    document.querySelector('.dealer-message').textContent = 'PUSH!'
   }
 }
 
@@ -98,7 +98,8 @@ const dealOneCard = () => {
     playerFinalScore = total
     if (total > 21) {
       // bust! statement
-      document.querySelector('.player-message').textContent('BUST!! - SORRY, TRY AGAIN!')
+      document.querySelector('.player-message').textContent =
+        'BUST!! - SORRY, TRY AGAIN!'
     }
   }
 }
