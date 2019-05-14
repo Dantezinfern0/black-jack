@@ -23,13 +23,11 @@ const playerHit = () => {
   dealCardToPlayer()
   if (playerScore > 21) {
     document.querySelector('.player-message').textContent = 'BUSTED!'
-    disablePlayerActions()
-  } else {
-    dealCardToPlayer()
+    // disablePlayerActions()
   }
 }
 const playerStay = () => {
-  disablePlayerActions()
+  // disablePlayerActions()
   document.querySelector('.dealer-hand').textContent = ' '
   for (let i = 0; i < dealerHand.length; i++) {
     const card = dealerHand[i]
@@ -44,24 +42,23 @@ const playerStay = () => {
   }
 }
 const createDeck = () => {
-  for (let _ = 0; (_ = 2); _++) {
-    for (let i = 0; i < ranks.length; i++) {
-      for (let j = 0; j < suits.length; j++) {
-        const card = {
-          rank: ranks[i].rank,
-          value: ranks[i].value,
-          suit: suits[j],
-          imgUrl: '/card-faces/' + ranks[i].rank + suits[j] + '.png'
-        }
-        fullDeck.push(card)
+  for (let i = 0; i < ranks.length; i++) {
+    for (let j = 0; j < suits.length; j++) {
+      const card = {
+        rank: ranks[i].rank,
+        value: ranks[i].value,
+        suit: suits[j],
+        imgUrl: '/card-faces/' + ranks[i].rank + suits[j] + '.png'
       }
+      fullDeck.push(card)
     }
   }
 }
-const disablePlayerActions = () => {
-  document.querySelector('.draw-button').disabled = true
-  document.querySelector('.stand-button').disabled = true
-}
+
+// const disablePlayerActions = () => {
+//   document.querySelector('.draw-button').disabled = true
+//   document.querySelector('.stand-button').disabled = true
+// }
 const shuffleDeck = () => {
   for (let i = fullDeck.length - 1; i > 0; i--) {
     const r = Math.floor(Math.random() * (i + 1))
@@ -73,26 +70,26 @@ const shuffleDeck = () => {
 const dealCardToPlayer = () => {
   const dealtCard = fullDeck.pop()
   playerHand.push(dealtCard)
-  const img = document.creatElement('img')
+  const img = document.createElement('img')
   img.src = dealtCard.imgUrl
   const li = document.createElement('li')
   li.appendChild(img)
   document.querySelector('.player-hand').appendChild(li)
-  document.querySelector('.playerScore').textContent = playerScore
+  document.querySelector('.player-score').textContent = playerScore
   playerScore += dealtCard.value
-  document.querySelector('.player-score')
+  document.querySelector('.player-score').textContent = playerScore
 }
 const dealCardToDealer = () => {
   const dealtCard = fullDeck.pop()
   playerHand.push(dealtCard)
-  const img = document.creatElement('img')
+  const img = document.createElement('img')
   img.src = '/card-back/red_back.png'
   const li = document.createElement('li')
   li.appendChild(img)
   document.querySelector('.dealer-hand').appendChild(li)
-  document.querySelector('.dealerScore').textContent = dealerScore
+  document.querySelector('.dealer-score').textContent = dealerScore
   dealerScore += dealtCard.value
-  document.querySelector('.dealer-score')
+  document.querySelector('.dealer-score').textContent = dealerScore
 }
 
 const main = () => {

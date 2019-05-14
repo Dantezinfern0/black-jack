@@ -38,6 +38,9 @@ button {
   background-color: #588150;
   font-size: 2rem;
 }
+li {
+  list-style: none;
+}
 .card-draw {
   list-style: none;
   padding: 1rem;
