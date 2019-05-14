@@ -12,9 +12,11 @@
       <h1 class="player-message">- | Black Jack | -</h1>
     </header>
     <main>
-      <section class="dealer-hand">
-        <footer>Dealer Hand</footer>
-      </section>
+      <section>
+      <ul class="dealer-hand" >
+      </ul>
+      <footer>Dealer Hand <div>--</div></footer>
+    </section>
       <div class="buttons">
         <h2>⬇️Draw⬇️</h2>
         <button class="draw-button">
@@ -24,13 +26,15 @@
         <button
           class="reset-button"
           type="submit"
-          onclick="window.location.reload()"
         >
           RESET
         </button>
       </div>
-      <section class="card-draw">
-        <footer>Player Hand</footer>
+      <section>
+      
+      <ul class="player-hand">
+      </ul>
+      <footer>Player Score <div>--</div></footer>
       </section>
     </main>
     <script src="/main.js" charset="utf-8"></script>
