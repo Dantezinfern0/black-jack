@@ -36,14 +36,12 @@ const playerStay = () => {
     const img = document.creatElement('img')
     img.src = card.imgUrl
     document.querySelector('.dealer-hand').appendChild(img)
-  } while (dealerScore < 17) {
-    for (let j =0; j<dealerHand.length j++) {
-      dealerScore += dealerHand[j]
   }
-}
-const disablePlayerActions = () => {
-  document.querySelector('.draw-button').disabled = true
-  document.querySelector('.stand-button').disabled = true
+  while (dealerScore < 17) {
+    for (let j = 0; j < dealerHand.length; j++) {
+      dealerScore += dealerHand[j]
+    }
+  }
 }
 const createDeck = () => {
   for (let _ = 0; (_ = 2); _++) {
@@ -60,7 +58,10 @@ const createDeck = () => {
     }
   }
 }
-
+const disablePlayerActions = () => {
+  document.querySelector('.draw-button').disabled = true
+  document.querySelector('.stand-button').disabled = true
+}
 const shuffleDeck = () => {
   for (let i = fullDeck.length - 1; i > 0; i--) {
     const r = Math.floor(Math.random() * (i + 1))
@@ -76,7 +77,7 @@ const dealCardToPlayer = () => {
   img.src = dealtCard.imgUrl
   const li = document.createElement('li')
   li.appendChild(img)
-  document.querySelector('.player-hand>ul').appendChild(li)
+  document.querySelector('.player-hand').appendChild(li)
   document.querySelector('.playerScore').textContent = playerScore
   playerScore += dealtCard.value
   document.querySelector('.player-score')
@@ -88,7 +89,7 @@ const dealCardToDealer = () => {
   img.src = '/card-back/red_back.png'
   const li = document.createElement('li')
   li.appendChild(img)
-  document.querySelector('.dealer-hand>ul').appendChild(li)
+  document.querySelector('.dealer-hand').appendChild(li)
   document.querySelector('.dealerScore').textContent = dealerScore
   dealerScore += dealtCard.value
   document.querySelector('.dealer-score')
@@ -102,6 +103,7 @@ const main = () => {
   dealCardToDealer()
   dealCardToDealer()
 }
-document.addEventListener('DOM').addEventListener(main)
-document.addEventListener('.draw-button').addEventListener('click', playerHit)
-document.addEventListener('.stand-button').addEventListener('click', playerStay)
+
+document.addEventListener('DOMContentLoaded', main)
+document.querySelector('.draw-button').addEventListener('click', playerHit)
+document.querySelector('.stand-button').addEventListener('click', playerStay)
