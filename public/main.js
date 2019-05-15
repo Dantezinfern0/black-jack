@@ -23,23 +23,13 @@ const playerHit = () => {
   dealCardToPlayer()
   if (playerScore > 21) {
     document.querySelector('.player-message').textContent = 'BUSTED!'
-    // disablePlayerActions()
+    disablePlayerButtons()
   }
 }
 const playerStay = () => {
-  // disablePlayerActions()
-  document.querySelector('.dealer-hand').textContent = ' '
-  for (let i = 0; i < dealerHand.length; i++) {
-    const card = dealerHand[i]
-    const img = document.creatElement('img')
-    img.src = card.imgUrl
-    document.querySelector('.dealer-hand').appendChild(img)
-  }
+  disablePlayerButtons()
   while (dealerScore < 17) {
-    for (let j = 0; j < dealerHand.length; j++) {
-      dealerScore += dealerHand[j]
-      
-    }
+    dealCardToDealer()
   }
 }
 
@@ -57,10 +47,10 @@ const createDeck = () => {
   }
 }
 
-// const disablePlayerActions = () => {
-//   document.querySelector('.draw-button').disabled = true
-//   document.querySelector('.stand-button').disabled = true
-// }
+const disablePlayerButtons = () => {
+  document.querySelector('.draw-button').disabled = true
+  document.querySelector('.stand-button').disabled = true
+}
 const shuffleDeck = () => {
   for (let i = fullDeck.length - 1; i > 0; i--) {
     const r = Math.floor(Math.random() * (i + 1))
@@ -83,7 +73,7 @@ const dealCardToPlayer = () => {
 }
 const dealCardToDealer = () => {
   const dealtCard = fullDeck.pop()
-  playerHand.push(dealtCard)
+  dealerHand.push(dealtCard)
   const img = document.createElement('img')
   img.src = dealtCard.imgUrl
   const li = document.createElement('li')
