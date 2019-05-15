@@ -22,7 +22,8 @@ let dealerScore = 0
 const playerHit = () => {
   dealCardToPlayer()
   if (playerScore > 21) {
-    document.querySelector('.player-message').textContent = 'BUSTED!'
+    document.querySelector('.player-message').textContent =
+      'YOU BUSTED, GAME OVER!'
     disablePlayerButtons()
   }
 }
@@ -31,8 +32,28 @@ const playerStay = () => {
   while (dealerScore < 17) {
     dealCardToDealer()
   }
+  if (dealerScore > 21) {
+    document.querySelector('.player-message').textContent =
+      'Dealer BUSTED! YOU WIN!!'
+  } else if (dealerScore === playerScore) {
+    document.querySelector('.player-message').textContent = 'TIE/PUSH!'
+  } else if (dealerScore > playerScore) {
+    document.querySelector('.player-message').textContent = 'SORRY, YOU LOSE!'
+  } else if (dealerScore < playerScore) {
+    document.querySelector('.player-message').textContent = 'YOU WIN!!'
+  }
 }
-
+const resetButton = () => {
+  disablePlayerButtons(false)
+  document.querySelector('.player-message').textContent = '-| BlackJack |-'
+  document.querySelector('.dealer-hand').textContent = ''
+  document.querySelector('.player-hand').textContent = ''
+  document.querySelector('.dealer-score').textContent = ''
+  document.querySelector('.player-score').textContent = ''
+  dealerScore = 0
+  playerScore = 0
+  main()
+}
 const createDeck = () => {
   for (let i = 0; i < ranks.length; i++) {
     for (let j = 0; j < suits.length; j++) {
@@ -96,3 +117,4 @@ const main = () => {
 document.addEventListener('DOMContentLoaded', main)
 document.querySelector('.draw-button').addEventListener('click', playerHit)
 document.querySelector('.stand-button').addEventListener('click', playerStay)
+document.querySelector('.reset-button').addEventListener('click', resetButton)
