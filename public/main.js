@@ -38,9 +38,11 @@ const playerStay = () => {
   while (dealerScore < 17) {
     for (let j = 0; j < dealerHand.length; j++) {
       dealerScore += dealerHand[j]
+      
     }
   }
 }
+
 const createDeck = () => {
   for (let i = 0; i < ranks.length; i++) {
     for (let j = 0; j < suits.length; j++) {
@@ -83,7 +85,7 @@ const dealCardToDealer = () => {
   const dealtCard = fullDeck.pop()
   playerHand.push(dealtCard)
   const img = document.createElement('img')
-  img.src = '/card-back/red_back.png'
+  img.src = dealtCard.imgUrl
   const li = document.createElement('li')
   li.appendChild(img)
   document.querySelector('.dealer-hand').appendChild(li)
