@@ -22,6 +22,7 @@ let dealerScore = 0
 const playerHit = () => {
   dealCardToPlayer()
   if (playerScore > 21) {
+    document.querySelector('.player-message').classList.add('red-background')
     document.querySelector('.player-message').textContent =
       'YOU BUSTED, GAME OVER!'
     disablePlayerButtons()
@@ -33,19 +34,30 @@ const playerStay = () => {
     dealCardToDealer()
   }
   if (dealerScore > 21) {
+    document
+      .querySelector('.player-message')
+      .classList.add('light-green-background')
     document.querySelector('.player-message').textContent =
       'Dealer BUSTED! YOU WIN!!'
   } else if (dealerScore === playerScore) {
     document.querySelector('.player-message').textContent = 'TIE/PUSH!'
   } else if (dealerScore > playerScore) {
+    document.querySelector('.player-message').classList.add('red-background')
     document.querySelector('.player-message').textContent = 'SORRY, YOU LOSE!'
   } else if (dealerScore < playerScore) {
+    document
+      .querySelector('.player-message')
+      .classList.add('light-green-background')
     document.querySelector('.player-message').textContent = 'YOU WIN!!'
   }
 }
 const resetButton = () => {
   document.querySelector('.draw-button').disabled = false
   document.querySelector('.stand-button').disabled = false
+  document.querySelector('.player-message').classList.remove('red-background')
+  document
+    .querySelector('.player-message')
+    .classList.remove('light-green-background')
   document.querySelector('.player-message').textContent = '-| BlackJack |-'
   document.querySelector('.dealer-hand').textContent = ''
   document.querySelector('.player-hand').textContent = ''

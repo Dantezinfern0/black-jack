@@ -60,3 +60,10 @@ li {
   display: none;
   background-image: url('./card-back/red_back.png');
 }
+.red-background {
+  background-color: red;
+}
+.light-green-background {
+  background-color: lightgreen;
+  color:blue;
+}
