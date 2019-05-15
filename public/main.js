@@ -44,7 +44,8 @@ const playerStay = () => {
   }
 }
 const resetButton = () => {
-  disablePlayerButtons(false)
+  document.querySelector('.draw-button').disabled = false
+  document.querySelector('.stand-button').disabled = false
   document.querySelector('.player-message').textContent = '-| BlackJack |-'
   document.querySelector('.dealer-hand').textContent = ''
   document.querySelector('.player-hand').textContent = ''
