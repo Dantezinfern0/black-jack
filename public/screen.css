@@ -46,12 +46,6 @@ li {
   padding: 1rem;
   background-color: #588157;
 }
-.draw-button {
-  display: flex;
-  flex-direction: column;
-  background-color: #588157;
-  border-color: #588157;
-}
 .buttons {
   display: flex;
   flex-direction: column;
