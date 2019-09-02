@@ -67,6 +67,8 @@ const resetButton = () => {
   playerScore = 0
   main()
 }
+
+
 const createDeck = () => {
   for (let i = 0; i < ranks.length; i++) {
     for (let j = 0; j < suits.length; j++) {
