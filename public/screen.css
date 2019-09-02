@@ -17,6 +17,8 @@ h1 {
   background-color: black;
   margin: 0 20% 0 20%;
   padding: 2rem;
+  border-radius: 12px;
+
 }
 main {
   display: flex;
@@ -33,10 +35,12 @@ footer {
   border-style: inset;
   border-color: black;
   border-width: 1px;
+  border-radius: 10px;
 }
 button {
   background-color: #588150;
   font-size: 2rem;
+  border-radius: 10px;
 }
 li {
   list-style: none;

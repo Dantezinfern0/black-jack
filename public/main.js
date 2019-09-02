@@ -19,6 +19,10 @@ let playerHand = []
 let fullDeck = []
 let playerScore = 0
 let dealerScore = 0
+let toggle = false
+const toggleSwitch = () => {
+  
+}
 const playerHit = () => {
   dealCardToPlayer()
   if (playerScore > 21) {
